@@ -22,7 +22,7 @@
     "@angular/router": "~10.0.2",
     "ag-grid-angular": "23.2.1",
     "ag-grid-community": "23.2.1",
-    "bootstrap": "4.1.1",
+    "bootstrap": "4.3.1",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.19",
     "ngx-bootstrap": "^5.6.1",
