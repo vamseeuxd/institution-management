@@ -1,0 +1,316 @@
+<!--Large modal-->
+<div bsModal #arrowFormModal="bs-modal"
+     class="modal fade" tabindex="-1"
+     (onShown)="arrowFormModalShown(arrowForm)"
+     [config]="{ignoreBackdropClick : true}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left"> Add New Institution </h4>
+        <button type="button" class="close pull-right" (click)="arrowFormModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+        <form #arrowForm="ngForm">
+          <ul class="nav nav-tabs mt-4 border-bottom-0">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab == BASIC_INFORMATION_TAB"
+                 (click)="activeTab = BASIC_INFORMATION_TAB"> Basic Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab == CONTACT_INFORMATION_TAB"
+                 (click)="activeTab = CONTACT_INFORMATION_TAB"> Contact Information</a>
+            </li>
+          </ul>
+
+          <div class="tab-content border p-4 mb-3" id="myTabContent">
+            <div [class.active]="activeTab == BASIC_INFORMATION_TAB" [class.show]="activeTab == BASIC_INFORMATION_TAB"
+                 id="BASIC_INFORMATION_TAB" class="tab-pane fade">
+              <div class="form-row">
+
+                <!-- Institution Name -->
+                <div class="form-group col-md-6">
+                  <label for="name">Institution Name <code>*</code></label>
+                  <input name="name" ngModel type="text" required autocomplete="off" class="form-control"
+                         id="name">
+                </div>
+
+                <!-- Institution Moto -->
+                <div class="form-group col-md-6">
+                  <label for="moto">Institution Moto</label>
+                  <input type="text" autocomplete="off" class="form-control" id="moto" name="moto" ngModel>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="row">
+
+                    <!-- Institution Logo -->
+                    <div class="form-group col-6">
+                      <label for="moto">Institution Logo</label>
+                      <button class="btn btn-light w-100" style="height:120px" (click)="logoFile.click();">
+                        <label *ngIf="!logo">Upload Image</label>
+                        <img [src]="logo" *ngIf="!!logo">
+                      </button>
+                      <input type="file"
+                             #logoFile
+                             autocomplete="off"
+                             accept="image/*"
+                             (change)="openModal(template, $event, 'logo')"
+                             class="d-none form-control" id="logo">
+
+                      <small class="form-text text-muted">
+                        Size 50 KB,Format <code>png</code> or <code>jpeg</code> Only Allow.
+                        image resolution <code>160px * 120px</code>
+                      </small>
+                    </div>
+
+                    <!-- Institution Image -->
+                    <div class="form-group col-6">
+                      <label for="image">Institution Image</label>
+                      <button class="btn btn-light w-100" style="height:120px" (click)="imageFile.click();">
+                        <label *ngIf="!image">Upload Image</label>
+                        <img [src]="image" *ngIf="!!image">
+                      </button>
+                      <input type="file"
+                             #imageFile
+                             autocomplete="off"
+                             accept="image/*"
+                             (change)="openModal(template, $event, 'image')"
+                             class="d-none form-control" id="image">
+
+                      <small class="form-text text-muted">
+                        Size 50 KB,Format <code>png</code> or <code>jpeg</code> Only Allow.
+                        image resolution <code>160px * 120px</code>
+                      </small>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- About Institution -->
+                <div class="form-group col-md-12">
+                  <label for="moto">About Institution</label>
+                  <textarea type="text" rows="5" autocomplete="off" class="form-control" id="about"
+                            name="about" ngModel></textarea>
+                </div>
+
+              </div>
+            </div>
+            <div [class.active]="activeTab == CONTACT_INFORMATION_TAB"
+                 [class.show]="activeTab == CONTACT_INFORMATION_TAB" id="CONTACT_INFORMATION_TAB" class="tab-pane fade">
+              <div class="form-row">
+
+                <!-- contactPerson -->
+                <div class="form-group col-md-6">
+                  <label for="contactPerson">Contact Person Name <code>*</code></label>
+                  <input type="text" required autocomplete="off" class="form-control"
+                         id="contactPerson" name="contactPerson"
+                         ngModel>
+                </div>
+
+                <!-- continent -->
+                <div class="form-group col-md-6"
+                     *ngIf="geo.continent$|async as continents">
+                  <label for="continent">Continent <code>*</code></label>
+                  <select required autocomplete="off"
+                          class="form-control" id="continent" name="continent"
+                          (change)="geo.setSelectedContinent($event.target.value)"
+                          ngModel>
+                    <option *ngFor="let continent of continents"
+                            [value]="continent?.geonameId">
+                      {{continent?.name}}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Country -->
+                <div class="form-group col-md-6"
+                     *ngIf="geo.countries$|async as countries">
+                  <label for="Country">Country <code>*</code></label>
+
+                  <select required autocomplete="off"
+                          (change)="geo.setSelectedCountry($event.target.value)"
+                          class="form-control" id="country" name="country"
+                          ngModel>
+                    <option *ngFor="let country of countries"
+                            [value]="country?.geonameId">
+                      {{country?.name}}
+                    </option>
+                  </select>
+
+                </div>
+
+                <!-- State -->
+                <div class="form-group col-md-6"
+                     *ngIf="geo.states$|async as states">
+                  <label for="State">State / Provice: <code>*</code></label>
+                  <select required autocomplete="off"
+                          (change)="geo.setSelectedState($event.target.value)"
+                          class="form-control" id="state" name="state" ngModel>
+                    <option *ngFor="let state of states"
+                            [value]="state?.geonameId">
+                      {{state?.name}}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- District -->
+                <div class="form-group col-md-6"
+                     *ngIf="geo.districts$|async as districts">
+                  <label for="district">District / Region <code>*</code></label>
+                  <select required autocomplete="off"
+                          (change)="geo.setSelectedDistrict($event.target.value)"
+                          class="form-control" id="district" name="district" ngModel>
+                    <option *ngFor="let district of districts"
+                            [value]="district?.geonameId">
+                      {{district?.name}}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- City -->
+                <div class="form-group col-md-6"
+                     *ngIf="geo.cities$|async as cities">
+                  <label for="moto">City / Village <code>*</code></label>
+                  <select type="text" required autocomplete="off" class="form-control" id="city" name="city" ngModel>
+                    <option *ngFor="let city of cities"
+                            [value]="city?.geonameId">
+                      {{city?.name}}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group col-md-6">
+                  <label for="address">Address <code>*</code></label>
+                  <textarea type="text" required autocomplete="off" class="form-control" id="address" name="address"
+                            ngModel></textarea>
+                </div>
+
+                <!-- PIN -->
+                <div class="form-group col-md-6">
+                  <label for="PIN">PIN <code>*</code></label>
+                  <input type="text" required autocomplete="off" class="form-control" id="pin" name="pin" ngModel>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group col-md-6">
+                  <label for="Email">Email <code>*</code></label>
+                  <input type="text" required autocomplete="off" class="form-control" id="email" email name="email"
+                         ngModel>
+                </div>
+
+                <!-- Mobile -->
+                <div class="form-group col-md-6">
+                  <label for="Mobile">Mobile <code>*</code></label>
+                  <input type="text" required autocomplete="off" class="form-control" id="mobile" name="mobile" ngModel>
+                </div>
+
+                <!-- Alternate Mobile -->
+                <div class="form-group col-md-6">
+                  <label for="alternateMobile">Alternate Mobile</label>
+                  <input type="text" autocomplete="off" class="form-control" id="alternateMobile" name="alternateMobile"
+                         ngModel>
+                </div>
+
+                <!-- Landline -->
+                <div class="form-group col-md-6">
+                  <label for="Landline">Landline</label>
+                  <input type="text" autocomplete="off" class="form-control" id="landline" name="landline" ngModel>
+                </div>
+
+                <!-- FAX -->
+                <div class="form-group col-md-6">
+                  <label for="FAX">FAX</label>
+                  <input type="text" autocomplete="off" class="form-control" id="fax" name="fax" ngModel>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-12 text-right">
+              <button type="button" [disabled]="arrowForm.invalid"
+                      (click)="addNewInstitution(arrowFormModal, arrowForm)"
+                      class="btn btn-primary">Register
+              </button>
+            </div>
+          </div>
+        </form>
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <pre>
+  {{arrowForm.value | json}}
+</pre> -->
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Crop the image for Institution Logo</h4>
+    <button type="button"
+            class="close pull-right"
+            (click)="cancelImage();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      format="png"
+      [resizeToWidth]="160"
+      [resizeToHeight]="120"
+      (imageCropped)="imageCropped($event)"
+    ></image-cropper>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="saveImage();">Save</button>
+      <button class="btn btn-dark" (click)="cancelImage();">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- *********************************************** -->
+<div class="border col-12 mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <input
+        class="form-control mb-2 mt-2"
+        type="text"
+        (input)="onQuickFilterChanged()"
+        id="quickFilter"
+        placeholder="QUICK FILTER..."
+      />
+    </div>
+    <div class="col-md-8 text-right">
+      <button (click)="arrowFormModal.show()" class="btn btn-primary mb-2 mt-2">Add New</button>
+      <button [disabled]="gridApi?.getSelectedRows().length==0" class="ml-3 btn btn-danger mb-2 mt-2">Delete Selected
+      </button>
+    </div>
+    <div class="col-12">
+      <ag-grid-angular
+        style="height: 300px;"
+        class="ag-theme-alpine w-100 mb-3"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [suppressCellSelection]="true"
+        [defaultColDef]="defaultColDef"
+        [suppressRowClickSelection]="true"
+        [rowSelection]="'multiple'"
+        [modules]="modules"
+        [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"
+        [rowSelection]="rowSelection"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>
+
+<!-- *********************************************** -->
