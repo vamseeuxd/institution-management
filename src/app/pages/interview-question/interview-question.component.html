@@ -1,0 +1,80 @@
+<h4 class="border-bottom pb-3 mb-5">Manage Course Topic Interview Questions</h4>
+
+
+<!-- ******************** Data Grid with Action Bar ******************** -->
+<div class="col-12 mb-3">
+  <div class="row">
+    <form #arrowForm="ngForm" class="col-12">
+      <div class="form-row">
+        <!-- name -->
+        <div class="form-group col-md-12">
+          <label for="topic"> Select Course Topic <code>*</code></label>
+          <select required autocomplete="off" class="form-control"
+                 id="topic" name="topic"
+                 ngModel>
+            <option>Topic 1</option>
+            <option>Topic 2</option>
+            <option>Topic 3</option>
+            <option>Topic 4</option>
+          </select>
+        </div>
+
+        <!-- Question -->
+        <div class="form-group col-md-12">
+          <label for="question">Question <code>*</code></label>
+          <textarea type="text" required autocomplete="off" class="form-control" id="question" name="question"
+                    ngModel></textarea>
+        </div>
+
+        <!-- Answer -->
+        <div class="form-group col-md-12">
+          <label for="answer">Answer <code>*</code></label>
+          <textarea type="text" required autocomplete="off" class="form-control" id="answer" name="answer"
+                    ngModel></textarea>
+        </div>
+
+
+        <div class="col-12 text-right">
+          <button type="button" [disabled]="arrowForm.invalid"
+                  (click)="addNewInstitution(arrowForm)"
+                  class="btn btn-primary">Interview Question
+          </button>
+        </div>
+
+      </div>
+    </form>
+    <div class="d-none col-md-4">
+      <input
+        class="form-control mb-2 mt-2"
+        type="text"
+        (input)="onQuickFilterChanged()"
+        id="quickFilter"
+        placeholder="QUICK FILTER..."
+      />
+    </div>
+    <div class="d-none col-md-8 text-right">
+      <!--<button (click)="arrowFormModal.show()" class="btn btn-primary mb-2 mt-2">Add New</button>-->
+      <button [disabled]="gridApi?.getSelectedRows().length==0" class="ml-3 btn btn-danger mb-2 mt-2">Delete Selected
+      </button>
+    </div>
+    <div class="col-12 mt-3">
+      <ag-grid-angular
+        style="height: 300px;"
+        class="ag-theme-alpine w-100 mb-3"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [suppressCellSelection]="true"
+        [defaultColDef]="defaultColDef"
+        [suppressRowClickSelection]="true"
+        [rowSelection]="'multiple'"
+        [modules]="modules"
+        [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"
+        [rowSelection]="rowSelection"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>
+<!-- ******************** Data Grid with Action Bar ******************** -->
+

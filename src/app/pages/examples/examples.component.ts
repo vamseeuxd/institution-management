@@ -1,52 +1,35 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
-import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
-import {ImageCroppedEvent} from 'ngx-image-cropper';
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
-import {ActionButtonsRendererComponent} from '../../shared/components/action-buttons-renderer/action-buttons-renderer.component';
-import {ColumnApi, GridApi} from 'ag-grid-community';
-import {GeoService} from '../../shared/services/geo/geo.service';
 import {NgForm} from '@angular/forms';
+import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
+import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
+import {ColumnApi, GridApi} from 'ag-grid-community';
+import {ActionButtonsRendererComponent} from '../../shared/components/action-buttons-renderer/action-buttons-renderer.component';
+import {ImageCroppedEvent} from 'ngx-image-cropper';
 
-export class InstitutionDetails {
+export class CourseDetails {
   public name = '';
-  public moto = '';
-  public about = '';
-  public logo = '';
-  public image = '';
-  public contactPerson = '';
-  public continent = '';
-  public country = '';
-  public state = '';
-  public district = '';
-  public city = '';
-  public address = '';
-  public pin = '';
-  public email = '';
-  public mobile = '';
-  public alternateMobile = '';
-  public landline = '';
-  public fax = '';
+  public description = '';
+  public duration = '';
 }
 
 @Component({
-  selector: 'app-manage-institutions',
-  templateUrl: './manage-institutions.component.html',
-  styleUrls: ['./manage-institutions.component.scss'],
-  providers: [GeoService]
+  selector: 'app-examples',
+  templateUrl: './examples.component.html',
+  styleUrls: ['./examples.component.scss']
 })
-export class ManageInstitutionsComponent {
+export class ExamplesComponent {
+
   arrowForm: NgForm;
-  defaultData: InstitutionDetails;
+  defaultData: CourseDetails;
   @ViewChild('arrowFormModal') arrowFormModal: ModalDirective;
 
   constructor(
     public modalService: BsModalService,
-    public geo: GeoService
   ) {
   }
 
-  activeInstitutionDetails: InstitutionDetails = new InstitutionDetails();
-  columns = Object.keys(this.activeInstitutionDetails);
+  activeCourseDetails: CourseDetails = new CourseDetails();
+  columns = Object.keys(this.activeCourseDetails);
   readonly BASIC_INFORMATION_TAB = 0;
   readonly CONTACT_INFORMATION_TAB = 1;
   activeTab = this.BASIC_INFORMATION_TAB;
@@ -58,11 +41,9 @@ export class ManageInstitutionsComponent {
   image: any = '';
 
   columnDefs = [
-    {headerName: 'Institution Name', field: 'name', sortable: true},
-    {headerName: 'Contact Person', field: 'contactPerson', sortable: true},
-    {headerName: 'City', field: 'city', sortable: true},
-    {headerName: 'Email', field: 'email', sortable: true},
-    {headerName: 'Mobile', field: 'mobile', sortable: true},
+    {headerName: 'Name', field: 'name', sortable: true},
+    {headerName: 'Description', field: 'description', sortable: true},
+    {headerName: 'Duration', field: 'duration', sortable: true},
     {
       headerName: 'Actions',
       cellRenderer: 'buttonRenderer',
@@ -79,7 +60,7 @@ export class ManageInstitutionsComponent {
     headerCheckboxSelection: this.isFirstColumn,
     checkboxSelection: this.isFirstColumn
   };
-  rowData: InstitutionDetails[] = [];
+  rowData: CourseDetails[] = [];
   modules: any[] = [ClientSideRowModelModule];
   gridApi: GridApi;
   gridColumnApi: ColumnApi;
@@ -125,10 +106,6 @@ export class ManageInstitutionsComponent {
       case 'edit':
         this.defaultData = params.rowData;
         this.arrowFormModal.show();
-        this.geo.setSelectedContinent(this.defaultData.continent);
-        this.geo.setSelectedCountry(this.defaultData.country);
-        this.geo.setSelectedState(this.defaultData.state);
-        this.geo.setSelectedDistrict(this.defaultData.district);
         break;
       case 'delete':
         break;
@@ -157,4 +134,5 @@ export class ManageInstitutionsComponent {
     arrowForm.resetForm(this.defaultData ? this.defaultData : {});
     this.activeTab = this.BASIC_INFORMATION_TAB;
   }
+
 }

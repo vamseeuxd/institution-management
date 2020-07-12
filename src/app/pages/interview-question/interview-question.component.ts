@@ -1,52 +1,36 @@
-import {Component, TemplateRef, ViewChild} from '@angular/core';
-import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
-import {ImageCroppedEvent} from 'ngx-image-cropper';
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
-import {ActionButtonsRendererComponent} from '../../shared/components/action-buttons-renderer/action-buttons-renderer.component';
-import {ColumnApi, GridApi} from 'ag-grid-community';
-import {GeoService} from '../../shared/services/geo/geo.service';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
+import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
+import {ColumnApi, GridApi} from 'ag-grid-community';
+import {ActionButtonsRendererComponent} from '../../shared/components/action-buttons-renderer/action-buttons-renderer.component';
+import {ImageCroppedEvent} from 'ngx-image-cropper';
 
-export class InstitutionDetails {
-  public name = '';
-  public moto = '';
-  public about = '';
-  public logo = '';
-  public image = '';
-  public contactPerson = '';
-  public continent = '';
-  public country = '';
-  public state = '';
-  public district = '';
-  public city = '';
-  public address = '';
-  public pin = '';
-  public email = '';
-  public mobile = '';
-  public alternateMobile = '';
-  public landline = '';
-  public fax = '';
+
+export class InterviewQuestionDetails {
+  public topic = '';
+  public question = '';
+  public answer = '';
+  public exercises = '';
 }
 
 @Component({
-  selector: 'app-manage-institutions',
-  templateUrl: './manage-institutions.component.html',
-  styleUrls: ['./manage-institutions.component.scss'],
-  providers: [GeoService]
+  selector: 'app-interview-question',
+  templateUrl: './interview-question.component.html',
+  styleUrls: ['./interview-question.component.scss']
 })
-export class ManageInstitutionsComponent {
+export class InterviewQuestionComponent {
+
   arrowForm: NgForm;
-  defaultData: InstitutionDetails;
-  @ViewChild('arrowFormModal') arrowFormModal: ModalDirective;
+  defaultData: InterviewQuestionDetails;
 
   constructor(
     public modalService: BsModalService,
-    public geo: GeoService
   ) {
   }
 
-  activeInstitutionDetails: InstitutionDetails = new InstitutionDetails();
-  columns = Object.keys(this.activeInstitutionDetails);
+  activeInterviewQuestionDetails: InterviewQuestionDetails = new InterviewQuestionDetails();
+  columns = Object.keys(this.activeInterviewQuestionDetails);
   readonly BASIC_INFORMATION_TAB = 0;
   readonly CONTACT_INFORMATION_TAB = 1;
   activeTab = this.BASIC_INFORMATION_TAB;
@@ -58,11 +42,9 @@ export class ManageInstitutionsComponent {
   image: any = '';
 
   columnDefs = [
-    {headerName: 'Institution Name', field: 'name', sortable: true},
-    {headerName: 'Contact Person', field: 'contactPerson', sortable: true},
-    {headerName: 'City', field: 'city', sortable: true},
-    {headerName: 'Email', field: 'email', sortable: true},
-    {headerName: 'Mobile', field: 'mobile', sortable: true},
+    {headerName: 'Course Topic', field: 'topic', sortable: true},
+    {headerName: 'Question', field: 'question', sortable: true},
+    {headerName: 'Answer', field: 'answer', sortable: true},
     {
       headerName: 'Actions',
       cellRenderer: 'buttonRenderer',
@@ -79,7 +61,7 @@ export class ManageInstitutionsComponent {
     headerCheckboxSelection: this.isFirstColumn,
     checkboxSelection: this.isFirstColumn
   };
-  rowData: InstitutionDetails[] = [];
+  rowData: InterviewQuestionDetails[] = [];
   modules: any[] = [ClientSideRowModelModule];
   gridApi: GridApi;
   gridColumnApi: ColumnApi;
@@ -124,11 +106,6 @@ export class ManageInstitutionsComponent {
     switch (params.action) {
       case 'edit':
         this.defaultData = params.rowData;
-        this.arrowFormModal.show();
-        this.geo.setSelectedContinent(this.defaultData.continent);
-        this.geo.setSelectedCountry(this.defaultData.country);
-        this.geo.setSelectedState(this.defaultData.state);
-        this.geo.setSelectedDistrict(this.defaultData.district);
         break;
       case 'delete':
         break;
@@ -146,15 +123,15 @@ export class ManageInstitutionsComponent {
     return thisIsFirstColumn;
   }
 
-  addNewInstitution(arrowFormModal: ModalDirective, arrowForm: NgForm): void {
+  addNewInstitution(arrowForm: NgForm): void {
     this.rowData.push(arrowForm.value);
     this.gridApi.setRowData(this.rowData);
     arrowForm.resetForm({});
-    arrowFormModal.hide();
   }
 
   arrowFormModalShown(arrowForm: NgForm): void {
     arrowForm.resetForm(this.defaultData ? this.defaultData : {});
     this.activeTab = this.BASIC_INFORMATION_TAB;
   }
+
 }

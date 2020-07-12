@@ -1,0 +1,97 @@
+<h4 class="border-bottom pb-3 mb-5">Manage Course Topic Examples</h4>
+
+
+<!-- ******************** Form Modal ******************** -->
+<div bsModal #arrowFormModal="bs-modal"
+     class="modal fade" tabindex="-1"
+     (onShown)="arrowFormModalShown(arrowForm)"
+     [config]="{ignoreBackdropClick : true}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left"> Add New Course Topic Example </h4>
+        <button type="button" class="close pull-right" (click)="arrowFormModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+        <form #arrowForm="ngForm">
+          <div class="form-row">
+
+            <!-- name -->
+            <div class="form-group col-md-6">
+              <label for="name">Course Name <code>*</code></label>
+              <input type="text" required autocomplete="off" class="form-control"
+                     id="name" name="name"
+                     ngModel>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group col-md-6">
+              <label for="description">Description <code>*</code></label>
+              <textarea type="text" required autocomplete="off" class="form-control" id="description" name="description"
+                        ngModel></textarea>
+            </div>
+
+            <!-- duration -->
+            <div class="form-group col-md-6">
+              <label for="duration">Duration <code>*</code></label>
+              <input type="text" required autocomplete="off" class="form-control" id="duration" name="duration" ngModel>
+            </div>
+
+
+            <div class="col-12 text-right">
+              <button type="button" [disabled]="arrowForm.invalid"
+                      (click)="addNewInstitution(arrowFormModal, arrowForm)"
+                      class="btn btn-primary">Save
+              </button>
+            </div>
+
+          </div>
+        </form>
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ******************** Form Modal ******************** -->
+
+<!-- ******************** Data Grid with Action Bar ******************** -->
+<div class="border col-12 mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <input
+        class="form-control mb-2 mt-2"
+        type="text"
+        (input)="onQuickFilterChanged()"
+        id="quickFilter"
+        placeholder="QUICK FILTER..."
+      />
+    </div>
+    <div class="col-md-8 text-right">
+      <button (click)="arrowFormModal.show()" class="btn btn-primary mb-2 mt-2">Add New</button>
+      <button [disabled]="gridApi?.getSelectedRows().length==0" class="ml-3 btn btn-danger mb-2 mt-2">Delete Selected
+      </button>
+    </div>
+    <div class="col-12">
+      <ag-grid-angular
+        style="height: 300px;"
+        class="ag-theme-alpine w-100 mb-3"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [suppressCellSelection]="true"
+        [defaultColDef]="defaultColDef"
+        [suppressRowClickSelection]="true"
+        [rowSelection]="'multiple'"
+        [modules]="modules"
+        [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"
+        [rowSelection]="rowSelection"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>
+<!-- ******************** Data Grid with Action Bar ******************** -->
+

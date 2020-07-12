@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "arrow-erp2": {
+      "hosting": {
+        "institution-management": [
+          "arrow-erp2"
+        ]
+      }
+    }
+  }
+}

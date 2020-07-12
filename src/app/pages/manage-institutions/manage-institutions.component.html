@@ -1,5 +1,7 @@
 <!--Large modal-->
-<h4>Manage Institutions</h4>
+<h4 class="border-bottom pb-3 mb-5">Manage Institutions</h4>
+
+<!-- ******************** Form Modal ******************** -->
 <div bsModal #arrowFormModal="bs-modal"
      class="modal fade" tabindex="-1"
      (onShown)="arrowFormModalShown(arrowForm)"
@@ -243,13 +245,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- <pre>
-  {{arrowForm.value | json}}
-</pre> -->
-
-
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Crop the image for Institution Logo</h4>
@@ -275,9 +270,9 @@
     </div>
   </div>
 </ng-template>
+<!-- ******************** Form Modal ******************** -->
 
-
-<!-- *********************************************** -->
+<!-- ******************** Data Grid with Action Bar ******************** -->
 <div class="border col-12 mb-3">
   <div class="row">
     <div class="col-md-4">
@@ -313,5 +308,5 @@
     </div>
   </div>
 </div>
+<!-- ******************** Data Grid with Action Bar ******************** -->
 
-<!-- *********************************************** -->
