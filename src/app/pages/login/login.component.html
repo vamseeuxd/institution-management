@@ -1,0 +1,306 @@
+<header class="d-flex masthead" style="background-image:url('./assets/bg-masthead.jpg');">
+  <div class="container my-auto text-center">
+    <h1 class="mb-1">Arrow Multimedia</h1>
+    <h3 class="mb-5">
+      Simple Yet Flexible And Powerful Institute for Software Training
+    </h3>
+    <div>
+      <div class="btn-group" dropdown>
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+          <i class="fa fa-key mr-2"></i>
+          <b>Login</b>
+          <span class="caret ml-2"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu">
+          <li>
+            <a class="dropdown-item text-danger" style="cursor: pointer;"
+               (click)="loginWithGoogle(redirectModalWhileLogin,true)">
+              <i class="fa fa-google mr-2"></i>Login with Google as Student</a>
+          </li>
+          <li>
+            <a class="dropdown-item text-info" style="cursor: pointer;">
+              <i class="fa fa-envelope mr-2"></i>
+              Login with Email/Password as Student
+            </a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item text-danger" style="cursor: pointer;" (click)="loginWithGoogle(redirectModalWhileLogin,false)">
+              <i class="fa fa-google mr-2"></i>Login with Google as Faculty</a>
+          </li>
+          <li>
+            <a class="dropdown-item text-info" style="cursor: pointer;">
+              <i class="fa fa-envelope mr-2"></i>
+              Login with Email/Password as Faculty
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="btn-group ml-5" dropdown>
+        <button dropdownToggle type="button" class="btn btn-danger dropdown-toggle">
+          <i class="fa fa-pencil mr-2"></i>
+          <b>Register</b>
+          <span class="caret ml-2"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu">
+          <li>
+            <a class="dropdown-item text-danger" style="cursor: pointer;"
+               (click)="registerWithGoogle(arrowFormModal,redirectModalWhileRegistration, true)">
+              <i class="fa fa-google mr-2"></i>
+              Register with Google as Student
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item text-info" style="cursor: pointer;">
+              <i class="fa fa-envelope mr-2"></i>
+              Register with Email/Password as Student
+            </a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item text-danger"
+               style="cursor: pointer;"
+               (click)="registerWithGoogle(arrowFormModal,redirectModalWhileRegistration,false)">
+              <i class="fa fa-google mr-2"></i>
+              Register with Google as Faculty
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item text-info"
+               style="cursor: pointer;">
+              <i class="fa fa-envelope mr-2"></i>
+              Register with Email/Password as Faculty
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--<button (click)="redirectModalWhileRegistration.show()">asdf</button>-->
+    <!--<pre>{{user?.providerData|json}}</pre>-->
+    <div class="overlay"></div>
+  </div>
+</header>
+
+
+<!-- ******************** Form Modal ******************** -->
+<div bsModal #arrowFormModal="bs-modal"
+     class="modal fade" tabindex="-1"
+     (onShown)="arrowFormModalShown(arrowForm)"
+     [config]="{ignoreBackdropClick : true}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left"> Register with Arrow Multimedia</h4>
+        <button type="button" class="close pull-right" (click)="arrowFormModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+        <form #arrowForm="ngForm">
+          <div class="form-row">
+
+            <div class="form-group col-md-6" *ngIf="defaultData && defaultData.photoURL">
+              <div class="media align-content-center justify-content-center">
+                <img class="border" [src]="defaultData.photoURL">
+              </div>
+            </div>
+
+            <!-- contactPerson -->
+            <div class="form-group col-md-6">
+              <label for="contactPerson">Contact Person Name <code>*</code></label>
+              <input type="text" required autocomplete="off" class="form-control"
+                     id="contactPerson" name="contactPerson"
+                     ngModel>
+            </div>
+
+            <!-- continent -->
+            <div class="form-group col-md-6"
+                 *ngIf="geo.continent$|async as continents">
+              <label for="continent">Continent <code>*</code></label>
+              <select required autocomplete="off"
+                      class="form-control" id="continent" name="continent"
+                      (change)="geo.setSelectedContinent($event.target.value)"
+                      ngModel>
+                <option *ngFor="let continent of continents"
+                        [value]="continent?.geonameId">
+                  {{continent?.name}}
+                </option>
+              </select>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group col-md-6"
+                 *ngIf="geo.countries$|async as countries">
+              <label for="Country">Country <code>*</code></label>
+
+              <select required autocomplete="off"
+                      (change)="geo.setSelectedCountry($event.target.value)"
+                      class="form-control" id="country" name="country"
+                      ngModel>
+                <option *ngFor="let country of countries"
+                        [value]="country?.geonameId">
+                  {{country?.name}}
+                </option>
+              </select>
+
+            </div>
+
+            <!-- State -->
+            <div class="form-group col-md-6"
+                 *ngIf="geo.states$|async as states">
+              <label for="State">State / Provice: <code>*</code></label>
+              <select required autocomplete="off"
+                      (change)="geo.setSelectedState($event.target.value)"
+                      class="form-control" id="state" name="state" ngModel>
+                <option *ngFor="let state of states"
+                        [value]="state?.geonameId">
+                  {{state?.name}}
+                </option>
+              </select>
+            </div>
+
+            <!-- District -->
+            <div class="form-group col-md-6"
+                 *ngIf="geo.districts$|async as districts">
+              <label for="district">District / Region <code>*</code></label>
+              <select required autocomplete="off"
+                      (change)="geo.setSelectedDistrict($event.target.value)"
+                      class="form-control" id="district" name="district" ngModel>
+                <option *ngFor="let district of districts"
+                        [value]="district?.geonameId">
+                  {{district?.name}}
+                </option>
+              </select>
+            </div>
+
+            <!-- City -->
+            <div class="form-group col-md-6"
+                 *ngIf="geo.cities$|async as cities">
+              <label for="city">City / Village <code>*</code></label>
+              <select type="text" required autocomplete="off" class="form-control" id="city" name="city" ngModel>
+                <option *ngFor="let city of cities"
+                        [value]="city?.geonameId">
+                  {{city?.name}}
+                </option>
+              </select>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group col-md-6">
+              <label for="address">Address <code>*</code></label>
+              <textarea type="text" required autocomplete="off" class="form-control" id="address" name="address"
+                        ngModel></textarea>
+            </div>
+
+            <!-- PIN -->
+            <div class="form-group col-md-6">
+              <label for="PIN">PIN <code>*</code></label>
+              <input type="text" required autocomplete="off" class="form-control" id="pin" name="pin" ngModel>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group col-md-6">
+              <label for="Email">Email <code>*</code></label>
+              <input type="email" readonly required autocomplete="off" class="form-control" id="email" email name="email"
+                     ngModel>
+            </div>
+
+            <!-- Mobile -->
+            <div class="form-group col-md-6">
+              <label for="Mobile">Mobile <code>*</code></label>
+              <input type="text" required autocomplete="off" class="form-control" id="mobile" name="mobile" ngModel>
+            </div>
+
+            <!-- Alternate Mobile -->
+            <div class="form-group col-md-6">
+              <label for="alternateMobile">Alternate Mobile</label>
+              <input type="text" autocomplete="off" class="form-control" id="alternateMobile" name="alternateMobile"
+                     ngModel>
+            </div>
+
+            <!-- Landline -->
+            <div class="form-group col-md-6">
+              <label for="Landline">Landline</label>
+              <input type="text" autocomplete="off" class="form-control" id="landline" name="landline" ngModel>
+            </div>
+
+            <!-- FAX -->
+            <div class="form-group col-md-6">
+              <label for="FAX">FAX</label>
+              <input type="text" autocomplete="off" class="form-control" id="fax" name="fax" ngModel>
+            </div>
+
+
+            <div class="col-12 text-right">
+              <button type="button" [disabled]="arrowForm.invalid"
+                      (click)="addNewContact(arrowFormModal, arrowForm)"
+                      class="btn btn-primary">Save & Login
+              </button>
+            </div>
+
+          </div>
+        </form>
+        <!--  *****************************************  Institution Registration Form  *****************************************  -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ******************** Form Modal ******************** -->
+
+<!-- ****************** Redirect Modal ****************** -->
+<div bsModal #redirectModalWhileRegistration="bs-modal"
+     class="modal fade" tabindex="-1"
+     [config]="{ignoreBackdropClick : true}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 lass="modal-title pull-left"> Already Registered</h4>
+        <!--<button type="button" class="close pull-right" (click)="arrowFormModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>-->
+      </div>
+      <div class="modal-body">
+        <p>
+          You have already registered  with Arrow Multimedia !
+          Would to like to login
+        </p>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" (click)="loginWhileRegistrationRedirect()">Yes</button>
+          <button class="btn btn-dark" (click)="logout(redirectModalWhileRegistration)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ****************** Redirect Modal ****************** -->
+
+<!-- ****************** Redirect Modal ****************** -->
+<div bsModal #redirectModalWhileLogin="bs-modal"
+     class="modal fade" tabindex="-1"
+     [config]="{ignoreBackdropClick : true}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 lass="modal-title pull-left"> Not Registered</h4>
+        <!--<button type="button" class="close pull-right" (click)="arrowFormModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>-->
+      </div>
+      <div class="modal-body">
+        <p>
+          You have not registered  with Arrow Multimedia as {{isStudent? 'Student' : 'Faculty' }} !
+          Would to like to register as {{isStudent? 'Student' : 'Faculty' }}
+        </p>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" (click)="registerAndLogin(arrowFormModal,redirectModalWhileLogin)">Yes Register & Login</button>
+          <button class="btn btn-dark" (click)="logout(redirectModalWhileLogin)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ****************** Redirect Modal ****************** -->
+
+

@@ -1,0 +1,19 @@
+export class ContactDetails {
+  public id = '';
+  public uid = '';
+  public photoURL = '';
+  public providerId = '';
+  public contactPerson = '';
+  public continent = '';
+  public country = '';
+  public state = '';
+  public district = '';
+  public city = '';
+  public address = '';
+  public pin = '';
+  public email = '';
+  public mobile = '';
+  public alternateMobile = '';
+  public landline = '';
+  public fax = '';
+}

@@ -14,9 +14,11 @@ import {MockInterviewsComponent} from './pages/mock-interviews/mock-interviews.c
 import {AttendanceComponent} from './pages/attendance/attendance.component';
 import {ExamplesComponent} from './pages/examples/examples.component';
 import {InterviewQuestionComponent} from './pages/interview-question/interview-question.component';
+import {LoginComponent} from './pages/login/login.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
+  {path: '', pathMatch: 'full', redirectTo: 'authentication'},
+  {path: 'authentication', component: LoginComponent},
   {path: 'manage-institutions', component: ManageInstitutionsComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'contact-details', component: ContactDetailsComponent},

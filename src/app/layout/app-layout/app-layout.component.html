@@ -1,9 +1,16 @@
-<app-header #appHeader></app-header>
+<app-header #appHeader [class.d-none]="router.url.includes('/authentication')"></app-header>
 
 <div class="container-fluid">
   <div class="row">
-    <app-side-nav [menuOpen]="appHeader.menuOpen"></app-side-nav>
-    <main role="main" class="mt-3 col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <app-side-nav [menuOpen]="appHeader.menuOpen"
+                  [class.d-none]="router.url.includes('/authentication')"></app-side-nav>
+    <main role="main"
+          [class.col-12]="router.url.includes('/authentication')"
+          [class.mt-3]="!router.url.includes('/authentication')"
+          [class.col-md-9]="!router.url.includes('/authentication')"
+          [class.ml-sm-auto]="!router.url.includes('/authentication')"
+          [class.col-lg-10]="!router.url.includes('/authentication')"
+          [class.px-md-4]="!router.url.includes('/authentication')">
       <ng-content></ng-content>
     </main>
   </div>

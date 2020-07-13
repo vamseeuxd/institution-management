@@ -1,0 +1,17 @@
+.masthead {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: table;
+  background: linear-gradient(90deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.1));
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.masthead h1 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+}
