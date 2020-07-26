@@ -15,24 +15,71 @@ import {AttendanceComponent} from './pages/attendance/attendance.component';
 import {ExamplesComponent} from './pages/examples/examples.component';
 import {InterviewQuestionComponent} from './pages/interview-question/interview-question.component';
 import {LoginComponent} from './pages/login/login.component';
+import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+import {DynamicFormComponent} from './components/dynamic-form/dynamic-form.component';
+import {DynamicPageComponent} from './pages/dynamic-page/dynamic-page.component';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['authentication']);
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'authentication'},
+  {path: '', pathMatch: 'full', redirectTo: 'dynamic-page'},
   {path: 'authentication', component: LoginComponent},
-  {path: 'manage-institutions', component: ManageInstitutionsComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'contact-details', component: ContactDetailsComponent},
-  {path: 'course-topic', component: CourseTopicComponent},
-  {path: 'examples', component: ExamplesComponent},
-  {path: 'interview-question', component: InterviewQuestionComponent},
-  {path: 'batch', component: BatchComponent},
-  {path: 'fees', component: FeesComponent},
-  {path: 'course-topic-exercises', component: CourseTopicExercisesComponent},
-  {path: 'course', component: CourseComponent},
-  {path: 'faculty', component: FacultyComponent},
-  {path: 'student', component: StudentComponent},
-  {path: 'mock-interviews', component: MockInterviewsComponent},
-  {path: 'attendance', component: AttendanceComponent},
+  {path: 'dynamic-form', component: DynamicFormComponent},
+  {path: 'dynamic-page', component: DynamicPageComponent},
+  {
+    path: 'manage-institutions',
+    component: ManageInstitutionsComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {
+    path: 'contact-details',
+    component: ContactDetailsComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {
+    path: 'course-topic',
+    component: CourseTopicComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {path: 'examples', component: ExamplesComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {
+    path: 'interview-question',
+    component: InterviewQuestionComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {path: 'batch', component: BatchComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {path: 'fees', component: FeesComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {
+    path: 'course-topic-exercises',
+    component: CourseTopicExercisesComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {path: 'course', component: CourseComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {path: 'faculty', component: FacultyComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {path: 'student', component: StudentComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin}},
+  {
+    path: 'mock-interviews',
+    component: MockInterviewsComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {
+    path: 'attendance',
+    component: AttendanceComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
 ];
 
 @NgModule({

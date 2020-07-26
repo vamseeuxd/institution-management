@@ -1,0 +1,14 @@
+:host {
+  .action-bar {
+    top: 0;
+    right: 0;
+    display: none;
+    position: absolute;
+  }
+
+  &:hover {
+    .action-bar {
+      display: inline-block;
+    }
+  }
+}

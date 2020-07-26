@@ -24,11 +24,17 @@ import {AttendanceComponent} from './pages/attendance/attendance.component';
 import {ExamplesComponent} from './pages/examples/examples.component';
 import {InterviewQuestionComponent} from './pages/interview-question/interview-question.component';
 import {environment} from '../environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireStorageModule} from '@angular/fire/storage';
-import { LoginComponent } from './pages/login/login.component';
+import {LoginComponent} from './pages/login/login.component';
+import {DynamicFormComponent} from './components/dynamic-form/dynamic-form.component';
+import {AddDynamicFormComponent} from './components/add-dynamic-form/add-dynamic-form.component';
+import {FormsModule} from '@angular/forms';
+import { DynamicPageComponent } from './pages/dynamic-page/dynamic-page.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DynamicPageSideNavComponent } from './pages/dynamic-page/dynamic-page-side-nav/dynamic-page-side-nav.component';
+import { DynamicInputComponent } from './pages/dynamic-page/controls/dynamic-input/dynamic-input.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +57,12 @@ import { LoginComponent } from './pages/login/login.component';
     AttendanceComponent,
     ExamplesComponent,
     InterviewQuestionComponent,
-    LoginComponent
+    LoginComponent,
+    DynamicFormComponent,
+    AddDynamicFormComponent,
+    DynamicPageComponent,
+    DynamicPageSideNavComponent,
+    DynamicInputComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +72,8 @@ import { LoginComponent } from './pages/login/login.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

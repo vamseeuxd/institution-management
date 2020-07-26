@@ -1,0 +1,138 @@
+<div class="action-bar">
+  <button class="btn btn-outline-warning btn-sm">
+    <i class="fa fa-edit"></i>
+  </button>
+</div>
+<label>
+  {{control.label}}
+  <span class="text-danger ml-1 font-weight-bold" *ngIf="control.required">*</span>
+</label>
+<input autocomplete="off"
+       [ngModel]="control.defaultValue"
+       [type]="control.type"
+       [id]="control.id"
+       [name]="control.name"
+       [minLength]="control.minLength"
+       [maxLength]="control.maxLength"
+       [required]="control.required"
+       class="form-control"
+       [placeholder]="control.placeholder">
+
+
+<!--
+  ReactJS Tutorial - 1 - Introduction
+  ReactJS Tutorial - 2 - Hello World
+  ReactJS Tutorial - 3 - Folder Structure
+  ReactJS Tutorial - 4 - Components
+  ReactJS Tutorial - 5 - Functional Components
+  ReactJS Tutorial - 6 - Class Components
+  ReactJS Tutorial - 7 - Hooks Update
+  ReactJS Tutorial - 8 - JSX
+  ReactJS Tutorial - 9 - Props
+  ReactJS Tutorial - 10 - State
+  ReactJS Tutorial - 11 - setState
+  ReactJS Tutorial - 12 - Destructuring props and state
+  ReactJS Tutorial - 13 - Event Handling
+  ReactJS Tutorial - 14 - Binding Event Handlers
+  ReactJS Tutorial - 15 - Methods as props
+  ReactJS Tutorial - 16 - Conditional Rendering
+  ReactJS Tutorial - 17 - List Rendering
+  ReactJS Tutorial - 18 - Lists and Keys
+  ReactJS Tutorial - 19 - Index as Key Anti-pattern
+  ReactJS Tutorial - 20 - Styling and CSS Basics
+  ReactJS Tutorial - 21 - Basics of Form Handling
+  ReactJS Tutorial - 22 - Component Lifecycle Methods
+  ReactJS Tutorial - 23 - Component Mounting Lifecycle Methods
+  ReactJS Tutorial - 24 - Component Updating Lifecycle Methods
+  ReactJS Tutorial - 25 - Fragments
+  ReactJS Tutorial - 26 - Pure Components
+  ReactJS Tutorial - 27 - memo
+  ReactJS Tutorial - 28 - Refs
+  ReactJS Tutorial - 29 - Refs with Class Components
+  ReactJS Tutorial - 30 - Forwarding Refs
+  ReactJS Tutorial - 31 - Portals
+  ReactJS Tutorial - 32 - Error Boundary
+  ReactJS Tutorial - 33 - Higher Order Components (Part 1)
+  ReactJS Tutorial - 34 - Higher Order Components (Part 2)
+  ReactJS Tutorial - 35 - Higher Order Components (Part 3)
+  ReactJS Tutorial - 36 - Render Props (Part 1)
+  ReactJS Tutorial - 37 - Render Props (Part 2)
+  ReactJS Tutorial - 38 - Context (Part 1)
+  ReactJS Tutorial - 39 - Context (Part 2)
+  ReactJS Tutorial - 40 - Context (Part 3)
+  ReactJS Tutorial - 41 - HTTP and React
+  ReactJS Tutorial - 42 - HTTP GET Request
+  ReactJS Tutorial - 43 - HTTP Post Request
+
+  React Hooks Tutorial - 1 - Introduction
+  React Hooks Tutorial - 2 - useState Hook
+  React Hooks Tutorial - 3 - useState with previous state
+  React Hooks Tutorial - 4 - useState with object
+  React Hooks Tutorial - 5 - useState with array
+  React Hooks Tutorial - 6 - useEffect Hook
+  React Hooks Tutorial - 7 - useEffect after render
+  React Hooks Tutorial - 8 - Conditionally run effects
+  React Hooks Tutorial - 9 - Run effects only once
+  React Hooks Tutorial - 10 - useEffect with cleanup
+  React Hooks Tutorial - 11 - useEffect with incorrect dependency
+  React Hooks Tutorial - 12 - Fetching data with useEffect Part 1
+  React Hooks Tutorial - 13 - Fetching data with useEffect Part 2
+  React Hooks Tutorial - 14 - Fetching data with useEffect Part 3
+  React Hooks Tutorial - 15 - useContext Hook Part 1
+  React Hooks Tutorial - 16 - useContext Hook Part 2
+  React Hooks Tutorial - 17 - useContext Hook Part 3
+  React Hooks Tutorial - 18 - useReducer Hook
+  React Hooks Tutorial - 19 - useReducer (simple state & action)
+  React Hooks Tutorial - 20 - useReducer (complex state & action)
+  React Hooks Tutorial - 21 - Multiple useReducers
+  React Hooks Tutorial - 22 - useReducer with useContext
+  React Hooks Tutorial - 23 - Fetching data with useReducer Part 1
+  React Hooks Tutorial - 24 - Fetching data with useReducer Part 2
+  React Hooks Tutorial - 25 - useState vs useReducer
+  React Hooks Tutorial - 26 - useCallback Hook
+  React Hooks Tutorial - 27 - useMemo Hook
+  React Hooks Tutorial - 28 - useRef Hook Part 1
+  React Hooks Tutorial - 29 - useRef Hook Part 2
+  React Hooks Tutorial - 30 - Custom Hooks
+  React Hooks Tutorial - 31 - useDocumentTitle Custom Hook
+  React Hooks Tutorial - 32 - useCounter Custom Hook
+  React Hooks Tutorial - 33 - useInput Custom Hook
+
+  React Redux Tutorials - 1 - Introduction
+  React Redux Tutorials - 2 - Getting Started
+  React Redux Tutorials - 3 - Three Core Concepts
+  React Redux Tutorials - 4 - Three Principles
+  React Redux Tutorials - 5 - Actions
+  React Redux Tutorials - 6 - Reducers
+  React Redux Tutorials - 7 - Store
+  React Redux Tutorials - 8 - Cakes and Ice Creams
+  React Redux Tutorials - 9 - Multiple Reducers
+  React Redux Tutorials - 10 - Combine Reducers
+  React Redux Tutorials - 11 - Middleware
+  React Redux Tutorials - 12 - Async Actions
+  React Redux Tutorials - 13 - Redux Thunk Middleware
+  React Redux Tutorials - 14 - React Redux Setup
+  React Redux Tutorials - 15 - Actions
+  React Redux Tutorials - 16 - Reducers
+  React Redux Tutorials - 17 - Store
+  React Redux Tutorials - 18 - connect
+  React Redux Tutorials - 19 - React Redux with Hooks
+  React Redux Tutorials - 20 - useSelector Hook
+  React Redux Tutorials - 21 - useDispatch Hook
+  React Redux Tutorials - 22 - Cakes and Ice Creams
+  React Redux Tutorials - 23 - Logger Middleware
+  React Redux Tutorials - 24 - Redux Devtool Extension
+  React Redux Tutorials - 25 - Action payload
+  React Redux Tutorials - 26 - mapStateToProps
+  React Redux Tutorials - 27 - mapDispatchToProps
+  React Redux Tutorials - 28 - Async Actions
+  React Redux Tutorials - 29 - Redux Thunk Get Request
+
+  React Testing - 01 - Introduction To Testing With Jest
+  React Testing - 02 - Jest Explained
+  React Testing - 03 - Writing Unit Tests With Jest
+  React Testing - 04 - Writing Integration Tests
+  React Testing - 05 - Mock Functions & Why
+
+  JSON.stringify( Array.from(document.querySelectorAll('#video-title.ytd-playlist-panel-video-renderer')).map(a=>a.innerText), null, 2 )
+-->

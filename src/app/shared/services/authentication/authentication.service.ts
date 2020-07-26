@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  isStudent = true;
 
-  constructor() { }
+  constructor(
+    public fireAuth: AngularFireAuth,
+  ) {
+  }
 }

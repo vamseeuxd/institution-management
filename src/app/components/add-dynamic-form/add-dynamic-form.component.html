@@ -1,0 +1,479 @@
+<div class="row">
+  <form class="container-fluid" #dynamicForm="ngForm">
+    <tabset id="style-3" class="col-12">
+      <!--Basic Details-->
+      <tab heading="Basic Details">
+        <div class="container-fluid mt-3">
+          <h5>Provide Basic Details</h5>
+          <div class="form-row">
+            <!--  Controller Type  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label>Controller Type</label>
+              <select autocomplete="off" ngModel="text" name="type" id="type" class="form-control">
+                <option value="checkbox">Check box</option>
+                <option value="color">Color</option>
+                <option value="date">Date</option>
+                <option value="datetime">Date time</option>
+                <option value="email">Email</option>
+                <option value="file">File</option>
+                <option value="image">Image</option>
+                <option value="month">Month</option>
+                <option value="number">Number</option>
+                <option value="password">Password</option>
+                <option value="radio">Radio</option>
+                <option value="range">Range</option>
+                <option value="search">Search</option>
+                <option value="select">Select</option>
+                <option value="tel">Tel</option>
+                <option value="text">Text</option>
+                <option value="time">Time</option>
+                <option value="url">Url</option>
+                <option value="week">Week</option>
+              </select>
+            </div>
+            <!--  Controller Type  -->
+
+            <!--  Controller Value  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label>Value</label>
+              <input autocomplete="off" ngModel
+                     type="text"
+                     id="controlValue"
+                     name="controlValue"
+                     class="form-control"
+                     placeholder="Default Value">
+            </div>
+            <!--  Controller Value  -->
+
+            <!--  Controller ID  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label>ID</label>
+              <input autocomplete="off"
+                     ngModel
+                     id="controlId"
+                     type="text" name="controlId"
+                     class="form-control"
+                     placeholder="Controller ID">
+            </div>
+            <!--  Controller ID  -->
+          </div>
+        </div>
+      </tab>
+      <!--Control Width-->
+      <tab heading="Control Width">
+        <div class="container-fluid mt-3">
+          <h5>Configure Control Width</h5>
+          <div class="form-row">
+            <div class="col-md-6">
+              <!--  Extra Large Width  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Extra Large Width</label>
+                <select autocomplete="off" ngModel="col-xl-4" name="colXl" id="colXl" class="form-control">
+                  <option [value]="'col-xl-'+i" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    col-xl-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Extra Large Width  -->
+
+              <!--  Large Width  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Large Width</label>
+                <select autocomplete="off" ngModel="col-lg-4" name="colLg" id="colLg" class="form-control">
+                  <option [value]="'col-lg-'+i" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    col-lg-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Large Width  -->
+
+              <!--  Medium Width  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Medium Width</label>
+                <select autocomplete="off" ngModel="col-md-4" name="colMd" id="colMd" class="form-control">
+                  <option [value]="'col-md-'+i" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    col-md-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Medium Width  -->
+
+              <!--  Small Width  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Small Width</label>
+                <select autocomplete="off" ngModel="col-sm-4" name="colSm" id="colSm" class="form-control">
+                  <option [value]="'col-sm-'+i" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    col-sm-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Small Width  -->
+
+              <!--  Extra Small Width  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Extra Small Width</label>
+                <select autocomplete="off" ngModel="col-xs-4" name="colXs" id="colXs" class="form-control">
+                  <option [value]="'col-xs-'+i" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    col-xs-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Extra Small Width  -->
+            </div>
+
+
+            <div class="col-md-6">
+              <!--  Extra Large Offset  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Extra Large Offset</label>
+                <select autocomplete="off" ngModel="offset-xl-0" name="offsetXl" id="offsetXl" class="form-control">
+                  <option [value]="'offset-xl-'+i" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12]">
+                    offset-xl-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Extra Large Offset  -->
+
+              <!--  Large Offset  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Large Offset</label>
+                <select autocomplete="off" ngModel="offset-lg-0" name="offsetLg" id="offsetLg" class="form-control">
+                  <option [value]="'offset-lg-'+i" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12]">
+                    offset-lg-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Large Offset  -->
+
+              <!--  Medium Offset  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Medium Offset</label>
+                <select autocomplete="off" ngModel="offset-md-0" name="offsetMd" id="offsetMd" class="form-control">
+                  <option [value]="'offset-md-'+i" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12]">
+                    offset-md-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Medium Offset  -->
+
+              <!--  Small Offset  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Small Offset</label>
+                <select autocomplete="off" ngModel="offset-sm-0" name="offsetSm" id="offsetSm" class="form-control">
+                  <option [value]="'offset-sm-'+i" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12]">
+                    offset-sm-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Small Offset  -->
+
+              <!--  Extra Small Offset  -->
+              <div class="form-group col-md-10 offset-md-1">
+                <label>Extra Small Offset</label>
+                <select autocomplete="off" ngModel="offset-xs-0" name="offsetXs" id="offsetXs" class="form-control">
+                  <option [value]="'offset-xs-'+i" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12]">
+                    offset-xs-{{i}}
+                  </option>
+                </select>
+              </div>
+              <!--  Extra Small Offset  -->
+            </div>
+
+          </div>
+        </div>
+
+      </tab>
+      <!--Required Validation-->
+      <tab heading="Required Validation">
+        <div class="container-fluid mt-3">
+          <h6>Configure Required Validation</h6>
+          <div class="form-row">
+            <!--  Controller Value  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="isRequired">
+                Is Required
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isRequired"
+                       id="isRequired">
+                <label class="form-check-label" for="isRequired">
+                  Is Required
+                </label>
+              </div>
+            </div>
+            <!--  Controller Value  -->
+
+            <!--  Required Validation Error Message  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isRequired">
+              <label for="requiredErrorMessage">Required Validation Error Message</label>
+              <input autocomplete="off"
+                     ngModel="This field is required"
+                     id="requiredErrorMessage"
+                     type="text" name="requiredErrorMessage"
+                     class="form-control"
+                     placeholder="Required Validation Error Message">
+            </div>
+            <!--  Required Validation Error Message  -->
+          </div>
+        </div>
+
+      </tab>
+      <!--Min Validation-->
+      <tab *ngIf="TYPE_CONFIG[dynamicForm.value.type].min" heading="Min Validation">
+        <div class="container-fluid mt-3">
+          <h6>Configure Min Validation</h6>
+          <div class="form-row">
+            <!--  Is Min Validation  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="isMin">
+                Is Min Validation
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isMin"
+                       id="isMin">
+                <label class="form-check-label" for="isMin">
+                  Is Min Validation
+                </label>
+              </div>
+            </div>
+            <!--  Is Min Validation  -->
+
+            <!--  Min Value / Characters  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isMin">
+              <label for="minValue">Min Value / Characters</label>
+              <input autocomplete="off"
+                     [ngModel]="3"
+                     id="minValue"
+                     [type]="TYPE_CONFIG[dynamicForm.value.type].minMaxType"
+                     name="minValue"
+                     class="form-control"
+                     placeholder="Min Value / Characters">
+            </div>
+            <!--  Min Value / Characters  -->
+
+            <!--  Min Validation Error Message  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isMin">
+              <label for="minErrorMessage">Min Validation Error Message</label>
+              <input autocomplete="off"
+                     ngModel="This field required more than {{dynamicForm.value.minValue}} characters"
+                     id="minErrorMessage"
+                     type="text"
+                     name="minErrorMessage"
+                     class="form-control"
+                     placeholder="Min Validation Error Message">
+            </div>
+            <!--  Min Validation Error Message  -->
+          </div>
+        </div>
+
+      </tab>
+      <!--Max Validation-->
+      <tab *ngIf="TYPE_CONFIG[dynamicForm.value.type].max" heading="Max Validation">
+        <div class="container-fluid mt-3">
+          <h6>Configure Max Validation</h6>
+          <div class="form-row">
+            <!--  Is Max Validation  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="isMax">
+                Is Max Validation
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isMax"
+                       id="isMax">
+                <label class="form-check-label" for="isMax">
+                  Is Max Validation
+                </label>
+              </div>
+            </div>
+            <!--  Is Max Validation  -->
+
+            <!--  Max Value / Characters  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isMax">
+              <label for="maxValue">Max Value / Characters</label>
+              <input autocomplete="off"
+                     [ngModel]="10"
+                     id="maxValue"
+                     [type]="TYPE_CONFIG[dynamicForm.value.type].minMaxType"
+                     name="maxValue"
+                     class="form-control"
+                     placeholder="Max Value / Characters">
+            </div>
+            <!--  Max Value / Characters  -->
+
+            <!--  Max Validation Error Message  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isMax">
+              <label for="maxErrorMessage">Max Validation Error Message</label>
+              <input autocomplete="off"
+                     ngModel="This field required less than {{dynamicForm.value.maxValue}} characters"
+                     id="maxErrorMessage"
+                     type="text"
+                     name="maxErrorMessage"
+                     class="form-control"
+                     placeholder="Max Validation Error Message">
+            </div>
+            <!--  Max Validation Error Message  -->
+          </div>
+        </div>
+
+      </tab>
+      <!--Pattern Validation-->
+      <tab *ngIf="TYPE_CONFIG[dynamicForm.value.type].pattern" heading="Pattern Validation">
+        <div class="container-fluid mt-3">
+          <h6>Configure Pattern Validation</h6>
+          <div class="form-row">
+            <!--  Is Pattern Validation  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="isPattern">
+                Is Pattern Validation
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isPattern"
+                       id="isPattern">
+                <label class="form-check-label" for="isPattern">
+                  Is Pattern Validation
+                </label>
+              </div>
+            </div>
+            <!--  Is Pattern Validation  -->
+
+            <!--  Pattern Value / Characters  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isPattern">
+              <label for="patternValue">Pattern Value / Characters</label>
+              <input autocomplete="off"
+                     ngModel="/^[a-zA-Z]+$/"
+                     id="patternValue"
+                     type="text"
+                     name="patternValue"
+                     class="form-control"
+                     placeholder="Pattern Value / Characters">
+            </div>
+            <!--  Pattern Value / Characters  -->
+
+            <!--  Pattern Validation Error Message  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isPattern">
+              <label for="patternErrorMessage">Pattern Validation Error Message</label>
+              <input autocomplete="off"
+                     ngModel="This Field required only English letters"
+                     id="patternErrorMessage"
+                     type="text"
+                     name="patternErrorMessage"
+                     class="form-control"
+                     placeholder="Pattern Validation Error Message">
+            </div>
+            <!--  Pattern Validation Error Message  -->
+          </div>
+        </div>
+
+      </tab>
+      <!--Duplicate Validation-->
+      <tab *ngIf="TYPE_CONFIG[dynamicForm.value.type].duplicate" heading="Duplicate Validation">
+        <div class="container-fluid mt-3">
+          <h6>Configure Duplicate Validation</h6>
+          <div class="form-row">
+            <!--  Controller Value  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="isDuplicate">
+                Is Duplicate
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isDuplicate"
+                       id="isDuplicate">
+                <label class="form-check-label" for="isDuplicate">
+                  Is Duplicate
+                </label>
+              </div>
+            </div>
+            <!--  Controller Value  -->
+
+            <!--  Controller Value  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isDuplicate">
+              <label for="isCaseSensitive">
+                Is CaseSensitive
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       ngModel
+                       name="isCaseSensitive"
+                       id="isCaseSensitive">
+                <label class="form-check-label" for="isCaseSensitive">
+                  Is CaseSensitive
+                </label>
+              </div>
+            </div>
+            <!--  Controller Value  -->
+
+            <!--  Duplicate Validation Error Message  -->
+            <div class="form-group col-md-6 offset-md-3" *ngIf="dynamicForm.value.isDuplicate">
+              <label for="duplicateErrorMessage">Duplicate Validation Error Message</label>
+              <input autocomplete="off"
+                     ngModel="This field is duplicate"
+                     id="duplicateErrorMessage"
+                     type="text" name="duplicateErrorMessage"
+                     class="form-control"
+                     placeholder="Duplicate Value Not allowed">
+            </div>
+            <!--  Duplicate Validation Error Message  -->
+          </div>
+        </div>
+
+      </tab>
+      <!--Data-Provider-->
+      <tab *ngIf="TYPE_CONFIG[dynamicForm.value.type].dataProvider" heading="Data-Provider">
+        <div class="container-fluid mt-3">
+          <h6>Configure Data-Provider</h6>
+          <div class="form-row">
+            <!--  Data Source  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label for="dataSource">Data Source</label>
+              <input autocomplete="off" id="dataSource" ngModel
+                     type="text" name="dataSource" class="form-control"
+                     placeholder="Data Source">
+            </div>
+            <!--  Data Source  -->
+
+            <!--  ID Field  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label>ID Field</label>
+              <input autocomplete="off" ngModel
+                     id="dataSourceIDField"
+                     type="text" name="dataSourceIDField"
+                     class="form-control"
+                     placeholder="ID Field">
+            </div>
+            <!--  ID Field  -->
+
+            <!--  Label Field  -->
+            <div class="form-group col-md-6 offset-md-3">
+              <label>Label Field</label>
+              <input autocomplete="off"
+                     ngModel
+                     type="text"
+                     name="dataSourceLabelField"
+                     id="dataSourceLabelField"
+                     class="form-control"
+                     placeholder="Label Field">
+            </div>
+            <!--  Label Field  -->
+          </div>
+        </div>
+
+      </tab>
+    </tabset>
+  </form>
+</div>

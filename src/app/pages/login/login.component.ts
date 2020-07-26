@@ -10,6 +10,7 @@ import {ContactDetailsService} from '../../shared/db/contact-details/contact-det
 import {Router} from '@angular/router';
 import {StudentsService} from '../../shared/db/students/students.service';
 import {FacultiesService} from '../../shared/db/faculties/faculties.service';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent {
 
   constructor(
     public fireAuth: AngularFireAuth,
+    public authentication: AuthenticationService,
     public geo: GeoService,
     public router: Router,
     public busyIndicator: BusyIndicatorService,
@@ -37,6 +39,7 @@ export class LoginComponent {
   async loginWithGoogle(confirmModal: ModalDirective, isStudent: boolean): Promise<any> {
     const busyIndicatorId = this.busyIndicator.show();
     this.isStudent = isStudent;
+    this.authentication.isStudent = isStudent;
     return new Promise(async (resolve, reject) => {
       try {
         const details = await this.fireAuth.signInWithPopup(new auth.GoogleAuthProvider());

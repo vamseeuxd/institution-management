@@ -1,0 +1,67 @@
+<ng-container *ngIf="pages$ | async as pages">
+  <ul class="list-group m-0 border-0">
+    <ng-container *ngTemplateOutlet="addNewPageTemplate;context:{pages:pages}"></ng-container>
+    <ng-container *ngTemplateOutlet="editPageListTemplate;context:{pages:pages}"></ng-container>
+  </ul>
+</ng-container>
+
+<ng-template #addNewPageTemplate let-pages="pages">
+  <li class="list-group-item py-1 px-1 border-0 bg-light">
+    <div class="input-group mb-1 mt-1">
+      <input #newPageNameTxt
+             (keyup.enter)="addPage(newPageNameTxt, pages.length)"
+             type="text"
+             class="form-control"
+             placeholder="New Page Name">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Add</button>
+      </div>
+    </div>
+  </li>
+</ng-template>
+
+<ng-template #editPageListTemplate let-pages="pages">
+  <li class="list-group-item px-1 py-1 border-0">
+    <ul cdkDropList class="list-group example-list p-0 border-0"
+        (cdkDropListDropped)="changePosition($event, pages)">
+      <li cdkDrag
+          [class.bg-light]="selectedPage?.id == page.id"
+          class="list-group-item example-box"
+          *ngFor="let page of pages">
+        <ng-container *ngTemplateOutlet="editPageListItemTemplate;context:{page:page}"></ng-container>
+      </li>
+    </ul>
+  </li>
+</ng-template>
+
+
+<ng-template #editPageListItemTemplate let-page="page">
+  {{ (selectedPage?.id == page.id) ? '' : page.name }}
+  <ng-container *ngIf="selectedPage?.id == page.id">
+  <input type="text" class="form-control" [defaultValue]="page.name" #editPageNameTxt>
+  <button class="btn-sm btn btn-primary mt-3 float-right"
+          (click)="updatePage(page, editPageNameTxt.value)">
+    Save
+  </button>
+  <button class="btn-sm btn btn-dark mt-3 mr-3 float-right"
+          (click)="editPage(null)">
+    Cancel
+  </button>
+  </ng-container>
+  <ng-container *ngIf="selectedPage?.id != page.id">
+    <ng-container
+      *ngTemplateOutlet="editPageActionBarTemplate;context:{page:page}"
+    ></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #editPageActionBarTemplate let-page="page">
+  <div class="position-absolute" style="top: 5px;right: 10px;">
+    <button (click)="deletePage(page.id)" class="btn-sm btn btn-danger">
+      <a class="fa fa-trash"></a>
+    </button>
+    <button (click)="editPage(page)" class="btn-sm btn btn-warning ml-2">
+      <a class="fa fa-edit"></a>
+    </button>
+  </div>
+</ng-template>

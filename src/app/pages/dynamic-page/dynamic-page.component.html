@@ -1,0 +1,254 @@
+<div class="container-fluid">
+  <div class="d-flex" style="height: calc(100vh - 60px)">
+    <app-dynamic-page-side-nav></app-dynamic-page-side-nav>
+    <div class="flex-fill border mt-2" style="width: calc(100vw - 250px);height: calc(100vh - 60px);overflow-y: auto;">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link border" (click)="addNewController(editFormControllerFormModal)"
+                 style="cursor: pointer;">
+                Add New Controller
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!--<pre *ngIf="selectedPage">{{selectedPage | json}}</pre>-->
+      <div class="container-fluid">
+        <div class="form-row">
+          <!--<pre>{{formControls | json}}</pre>-->
+          <app-dynamic-input></app-dynamic-input>
+          <!--<div *ngFor="let control of formControls"
+               class="dynamic-form-group form-group col-md-3 position-relative">
+            <div class="action-bar">
+              <button class="btn btn-outline-warning btn-sm" (click)="editFormControllerFormModal.show()">
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+            <label>
+              {{control.label}}
+              <span class="text-danger ml-1 font-weight-bold" *ngIf="control.required">*</span>
+            </label>
+            <input autocomplete="off"
+                   [ngModel]="control.defaultValue"
+                   [type]="control.type"
+                   [id]="control.id"
+                   [name]="control.name"
+                   [minLength]="control.minLength"
+                   [maxLength]="control.maxLength"
+                   [required]="control.required"
+                   [className]="control.controlClass"
+                   [placeholder]="control.placeholder">
+          </div>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #editFormControllerFormModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name"
+     (onShown)="onEditFormControllerShown(editFormControllerForm)">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="dialog-static-name" class="modal-title pull-left">
+          {{formTitle}}
+        </h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="editFormControllerFormModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #editFormControllerForm="ngForm">
+          <div class="form-row">
+            <!--  *********************************** Basic Details  *********************************** -->
+            <h6 class="col-md-12 pb-1 border-bottom">Basic Details: </h6>
+            <div class="form-group col-md-4">
+              <label>Type<span class="text-danger ml-1 font-weight-bold">*</span></label>
+              <select #typeController="ngModel"
+                      autocomplete="off"
+                      [class.is-invalid]="typeController.invalid"
+                      [class.is-valid]="typeController.valid"
+                      name="type" required ngModel class="custom-select">
+                <option *ngFor="let option of controlTypes">
+                  {{option}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Name<span class="text-danger ml-1 font-weight-bold">*</span></label>
+              <input autocomplete="off" placeholder="Name" type="text" name="name" required ngModel
+                     class="form-control"
+                     pattern="^[a-zA-Z0-9]*$"
+                     #nameController="ngModel"
+                     minlength="3"
+                     maxlength="25"
+                     [class.is-invalid]="nameController.invalid || !checkForUniqueName(nameController.value)"
+                     [class.is-valid]="nameController.valid && checkForUniqueName(nameController.value)"
+              >
+              <div class="form-text text-muted">
+                Unique, Alphanumeric, No space, Minimum 3 chars. {{checkForUniqueName(nameController.value)}}
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Place Holder</label>
+              <input autocomplete="off" placeholder="Place Holder" type="text" name="placeholder" ngModel
+                     class="form-control is-valid">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Label<span class="text-danger ml-1 font-weight-bold">*</span></label>
+              <input autocomplete="off" placeholder="Label" type="text" name="label" required ngModel
+                     class="form-control"
+                     minlength="3"
+                     maxlength="25"
+                     #labelController="ngModel"
+                     [class.is-invalid]="labelController.invalid"
+                     [class.is-valid]="labelController.valid"
+              >
+              <div class="form-text text-muted">
+                Provide valid label with minimum 3 chars.
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Default Value</label>
+              <input autocomplete="off" type="text" placeholder="Default Value" name="defaultValue" ngModel
+                     class="form-control is-valid">
+            </div>
+
+            <!--  *********************************** Layout Details  *********************************** -->
+            <h6 class="col-md-12 mt-3 pb-1 border-bottom">Layout Details: </h6>
+            <div class="form-group col-md-4">
+              <label>Width<span class="text-danger ml-1 font-weight-bold">*</span></label>
+              <select autocomplete="off" name="width"
+                      #widthController="ngModel"
+                      [class.is-invalid]="widthController.invalid"
+                      [class.is-valid]="widthController.valid"
+                      required ngModel class="custom-select">
+                <option *ngFor="let option of [1,2,3,4,5,6,7,8,9,10,11,12]">
+                  col-md-{{option}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Offset<span class="text-danger ml-1 font-weight-bold">*</span></label>
+              <select autocomplete="off" name="offset"
+                      #offsetController="ngModel"
+                      [class.is-invalid]="offsetController.invalid"
+                      [class.is-valid]="offsetController.valid"
+                      required ngModel class="custom-select">
+                <option *ngFor="let option of [0,1,2,3,4,5,6,7,8,9,10,11]">
+                  offset-md-{{option}}
+                </option>
+              </select>
+            </div>
+
+            <!--  *********************************** Data Provider Details  *********************************** -->
+            <ng-container *ngIf="dataProviderControls.indexOf(editFormControllerForm.value['type'])>=0">
+              <h6 class="col-md-12 mt-3 pb-1 border-bottom">Data Provider Details: </h6>
+              <div class="form-group col-md-4">
+                <label>Data Provider<span class="text-danger ml-1 font-weight-bold">*</span></label>
+                <select autocomplete="off" name="dataProvider"
+                        #dataProviderController="ngModel"
+                        [class.is-invalid]="dataProviderController.invalid"
+                        [class.is-valid]="dataProviderController.valid"
+                        required ngModel class="custom-select">
+                  <option *ngFor="let option of existingForms">
+                    {{option}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Label Field<span class="text-danger ml-1 font-weight-bold">*</span></label>
+                <select autocomplete="off" name="labelField"
+                        #labelFieldController="ngModel"
+                        [class.is-invalid]="labelFieldController.invalid"
+                        [class.is-valid]="labelFieldController.valid"
+                        required ngModel class="custom-select">
+                  <option *ngFor="let option of existingForms">
+                    {{option}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label>ID Field<span class="text-danger ml-1 font-weight-bold">*</span></label>
+                <select autocomplete="off" name="idField"
+                        #idFieldController="ngModel"
+                        [class.is-invalid]="idFieldController.invalid"
+                        [class.is-valid]="idFieldController.valid"
+                        required ngModel class="custom-select">
+                  <option *ngFor="let option of existingForms">
+                    {{option}}
+                  </option>
+                </select>
+              </div>
+            </ng-container>
+            <!--  *********************************** Validation Details  *********************************** -->
+            <h6 class="col-md-12 mt-3 pb-1 border-bottom">Validation Details: </h6>
+
+            <div class="form-group col-md-4">
+              <label>Required</label>
+              <div class="custom-control custom-checkbox">
+                <input name="required" ngModel type="checkbox" class="custom-control-input is-valid" id="required">
+                <label class="custom-control-label" for="required">Required</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Allow Duplicate</label>
+              <div class="custom-control custom-checkbox">
+                <input name="allowDuplicate" ngModel type="checkbox" class="custom-control-input is-valid"
+                       id="allowDuplicate">
+                <label class="custom-control-label" for="allowDuplicate">Allow Duplicate</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4" *ngIf="minMaxConfig[editFormControllerForm.value['type']]">
+              <label>Min</label>
+              <input autocomplete="off"
+                     [type]="minMaxConfig[editFormControllerForm.value['type']]"
+                     placeholder="min" name="min" ngModel class="form-control is-valid">
+            </div>
+
+            <div class="form-group col-md-4" *ngIf="minMaxConfig[editFormControllerForm.value['type']]">
+              <label>Max</label>
+              <input autocomplete="off" placeholder="Max"
+                     [type]="minMaxConfig[editFormControllerForm.value['type']]"
+                     name="max" ngModel class="form-control is-valid">
+            </div>
+
+            <ng-container *ngIf="patternControls.indexOf(editFormControllerForm.value['type'])>=0">
+              <div class="form-group col-md-4">
+                <label>Pattern</label>
+                <input autocomplete="off" placeholder="Pattern" type="text" name="pattern" ngModel
+                       class="form-control is-valid">
+              </div>
+            </ng-container>
+          </div>
+          <button type="submit"
+                  [disabled]="editFormControllerForm.invalid || !checkForUniqueName(nameController.value)"
+                  (click)="saveNewControllerAndClose(editFormControllerForm,editFormControllerFormModal)"
+                  class="btn btn-primary float-right">Save & Close
+          </button>
+          <button type="submit"
+                  [disabled]="editFormControllerForm.invalid || !checkForUniqueName(nameController.value)"
+                  (click)="saveAndAddNew(editFormControllerForm)"
+                  class="btn btn-primary float-right mr-3">Save & Add New
+          </button>
+        </form>
+
+        <!--<pre>{{editFormControllerForm.value | json}}</pre>-->
+
+      </div>
+    </div>
+  </div>
+</div>
